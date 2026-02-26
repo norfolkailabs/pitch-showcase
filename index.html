@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loeb.nyc Showcase — February 26, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card-bg: #12121a;
+  --card-border: #1e1e2e;
+  --text: #e4e4e8;
+  --text-dim: #8888a0;
+  --accent-gold: #f0c27f;
+  --accent-amber: #e8914f;
+  --accent-rose: #d07ab0;
+  --accent-purple: #9b7ed8;
+  --accent-blue: #5b8def;
+  --accent-green: #4ade80;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 24px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(155,126,216,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(155,126,216,0.15);
+  color: var(--accent-purple);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-amber), var(--accent-rose), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: var(--text-dim);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero .meta {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.format-bar {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 16px 24px;
+  background: rgba(91,141,239,0.08);
+  border: 1px solid rgba(91,141,239,0.15);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.format-bar strong {
+  color: var(--accent-blue);
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.2s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+
+.card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber)); }
+.card:nth-child(1):hover { border-color: var(--accent-gold); }
+.card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+.card:nth-child(2):hover { border-color: var(--accent-blue); }
+.card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
+.card:nth-child(3):hover { border-color: var(--accent-green); }
+.card:nth-child(4)::before { background: linear-gradient(90deg, var(--accent-rose), var(--accent-purple)); }
+.card:nth-child(4):hover { border-color: var(--accent-rose); }
+.card:nth-child(5)::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose)); }
+.card:nth-child(5):hover { border-color: var(--accent-amber); }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.card-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.card-header .stage-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.stage-preseed { background: rgba(240,194,127,0.15); color: var(--accent-gold); }
+.stage-seed { background: rgba(91,141,239,0.15); color: var(--accent-blue); }
+
+.card .location {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.card .sector {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.05);
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.card .description {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.card .founders {
+  margin-bottom: 16px;
+}
+
+.card .founders h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.founder {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.founder .name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.founder .bio {
+  color: var(--text-dim);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.stat .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.stat .value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card .investors {
+  font-size: 12px;
+  color: var(--text-dim);
+  padding-top: 12px;
+  border-top: 1px solid var(--card-border);
+}
+
+.card .investors strong {
+  color: var(--text);
+}
+
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--text-dim);
+  font-size: 13px;
+  border-top: 1px solid var(--card-border);
+}
+
+.footer a {
+  color: var(--accent-purple);
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 40px 16px 24px; }
+  .grid { padding: 0 16px 40px; }
+  .card { padding: 20px; }
+  .stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Exclusive Investor Event</div>
+  <h1>Loeb.nyc Showcase</h1>
+  <p>Five exceptional companies. Fifteen minutes each. No slides — just founders and their stories.</p>
+  <div class="meta">
+    <span>📅 February 26, 2026</span>
+    <span>📍 712 5th Ave, New York</span>
+    <span>🎙️ Hosted by Ron Insana</span>
+  </div>
+</div>
+
+<div class="format-bar">
+  Each company has <strong>15 minutes</strong> with CNBC's <strong>Ron Insana</strong> — no slides, just engaging, focused conversations to showcase both the opportunity and the entrepreneur.
+</div>
+
+<div class="grid">
+
+  <!-- Luminous Robotics -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Luminous Robotics</h2>
+      <span class="stage-badge stage-seed">Series A</span>
+    </div>
+    <div class="location">📍 United States</div>
+    <div class="sector">AI / Robotics / Energy</div>
+    <div class="description">
+      Solar robotics company redefining how solar installations get done. Luminous builds robots that make solar crews safer and faster — with zero process changes required. Trusted by major solar developers, construction companies, mechanical installers, and world governments.
+    </div>
+    <div class="founders">
+      <h3>Founder</h3>
+      <div class="founder">
+        <div><span class="name">Jay Wong</span> — <span class="bio">15 years building robots. Previously at world-class defense and R&D organizations.</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Sector</div>
+        <div class="value">AI + Robotics + Energy</div>
+      </div>
+      <div class="stat">
+        <div class="label">Distribution</div>
+        <div class="value">B2B</div>
+      </div>
+    </div>
+    <div class="investors"><strong>Thesis:</strong> At the intersection of AI and the physical world — enabling the clean energy transition through intelligent automation.</div>
+  </div>
+
+  <!-- Charlemagne Labs -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Charlemagne Labs</h2>
+      <span class="stage-badge stage-seed">Seed</span>
+    </div>
+    <div class="location">📍 New York, NY</div>
+    <div class="sector">Cybersecurity / AI & Machine Learning</div>
+    <div class="description">
+      Privacy-first, on-device security agent ("Agent Charley") that intervenes in real time to prevent social engineering attacks — the 90% of cyber incidents that current tools miss. Deploys in minutes, manages centrally. Human-layer security for the AI age.
+    </div>
+    <div class="founders">
+      <h3>Founders</h3>
+      <div class="founder">
+        <div><span class="name">Jeremy Philip Galen</span> — <span class="bio">12 years at Meta, PM in Trust & Safety. Saw ML-driven fraud firsthand.</span></div>
+      </div>
+      <div class="founder">
+        <div><span class="name">Staford Titus Selvaraj</span> — <span class="bio">Cybersecurity researcher. Cloud security, SOC investigations, penetration testing.</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Traction</div>
+        <div class="value">Revenue generating</div>
+      </div>
+      <div class="stat">
+        <div class="label">Key Win</div>
+        <div class="value">Major frontier AI co.</div>
+      </div>
+    </div>
+    <div class="investors"><strong>Backed by:</strong> Night Capital, Ritual Capital, Background Capital</div>
+  </div>
+
+  <!-- Ruvo -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Ruvo</h2>
+      <span class="stage-badge stage-seed">Seed</span>
+    </div>
+    <div class="location">📍 São Paulo, Brazil</div>
+    <div class="sector">FinTech / Stablecoin / Web3 Infrastructure</div>
+    <div class="description">
+      The global dollar account for Brazil. Stablecoin-powered infrastructure replacing slow, expensive SWIFT transfers with instant settlement. Hold, send, receive USD — convert instantly to BRL via Pix. First to market with instant cross-border financial infrastructure.
+    </div>
+    <div class="founders">
+      <h3>Founders</h3>
+      <div class="founder">
+        <div><span class="name">Alec Howard</span> — <span class="bio">Ex-Uber Brazil. Deep experience scaling cross-border payments in international markets.</span></div>
+      </div>
+      <div class="founder">
+        <div><span class="name">Mike Mason</span> — <span class="bio">Co-founded Mercato (Loeb.nyc portfolio, exited). Scaled Tuned to $7B in crypto volume.</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Market Size</div>
+        <div class="value">$146B annually</div>
+      </div>
+      <div class="stat">
+        <div class="label">Customers</div>
+        <div class="value">116 since Oct 2025</div>
+      </div>
+    </div>
+    <div class="investors"><strong>Backed by:</strong> Y Combinator, Coinbase Ventures, Angels</div>
+  </div>
+
+  <!-- Proda -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Proda</h2>
+      <span class="stage-badge stage-preseed">Pre-Seed</span>
+    </div>
+    <div class="location">📍 Los Angeles, CA</div>
+    <div class="sector">CPG / Functional Beverages</div>
+    <div class="description">
+      The world's first craveable protein soda — 10g of complete protein, zero sugar, under 50 calories in classic soda flavors people actually want to drink. Not gym-coded. Built for the mainstream consumer by the team that sold Suja Juice for $350M.
+    </div>
+    <div class="founders">
+      <h3>Founders</h3>
+      <div class="founder">
+        <div><span class="name">Matthew Postlewhaite</span> — <span class="bio">Actor & entrepreneur. Founded NUDE Chocolate, scaled to 300+ retailers, exited.</span></div>
+      </div>
+      <div class="founder">
+        <div><span class="name">Jeff Church</span> — <span class="bio">Co-founded Suja Juice ($150M rev → $350M exit). 8 companies in 25 years. HBS grad.</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">First Order</div>
+        <div class="value">$650K (Sprouts)</div>
+      </div>
+      <div class="stat">
+        <div class="label">Market</div>
+        <div class="value">$1.7–2.2B opportunity</div>
+      </div>
+    </div>
+    <div class="investors"><strong>Backed by:</strong> Angels / Family Offices</div>
+  </div>
+
+  <!-- Little Chonk -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Little Chonk</h2>
+      <span class="stage-badge stage-seed">Seed</span>
+    </div>
+    <div class="location">📍 New York, NY</div>
+    <div class="sector">CPG / Pet Wellness</div>
+    <div class="description">
+      Creator-led pet brand powered by Maxine the Fluffy Corgi and a 55M+ follower ecosystem. Launched with the viral Maxine One dog backpack ($6M in sales), now expanding into science-backed pet supplements challenging outdated incumbents — with zero paid acquisition.
+    </div>
+    <div class="founders">
+      <h3>Founder</h3>
+      <div class="founder">
+        <div><span class="name">Bryan Reisberg</span> — <span class="bio">Creator of @madmax_fluffyroad (50M reach/month). NYU Tisch grad. Former ad creative director at Mother NY & Deutsch.</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Revenue</div>
+        <div class="value">$6M lifetime (gear)</div>
+      </div>
+      <div class="stat">
+        <div class="label">Reach</div>
+        <div class="value">400M+ annual impressions</div>
+      </div>
+    </div>
+    <div class="investors"><strong>Backed by:</strong> Angels</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Built by <a href="#">Atlas</a> 🌍 — AI Chief of Staff
+</div>
+
+</body>
+</html>
